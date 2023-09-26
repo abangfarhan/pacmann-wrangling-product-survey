@@ -28,3 +28,7 @@ Need to:
 In other words, each question is turned into 3 lines (since there's 3 choice for each line), where the chosen option is set to "1" in column "choice".
 
 Submit [here](https://docs.google.com/forms/d/e/1FAIpQLSdjKuj8xs7_yGzsfluNRGfcJ5A68CFz7LGqLJrMm1sq5kxFTg/viewform).
+
+## Data Wrangling
+
+The data wrangling is done in `clean_data.py` in this repo.
