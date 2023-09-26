@@ -1,6 +1,11 @@
 import pandas as pd
 
 def clean_question_column(col: pd.Series) -> pd.Series:
+    '''
+    Convert question column from consisting of strings to list of strings.
+    For example, input column values: ["A,B", "B", "C"]
+    Output: [["A","B"], ["B"], ["C"]]
+    '''
     col = col.str.replace('. Tidak memilih semua product', '', regex=False)
     col = col.str.replace(' ', '')
     col = col.str.split(',')
@@ -49,18 +54,20 @@ if __name__ == '__main__':
     is_invalid = df.iloc[:,qcol_start:].apply(lambda col: col.apply(lambda lst: 'D' in lst and len(lst) > 1)).any(axis=1)
     df = df[~is_invalid]
 
+    # Convert data such that each user+question will be in a single row
     df2 = df.melt(id_vars='user_phone', var_name='Question', value_name='Choices')
     letters = ('A', 'B', 'C')
     for letter in letters:
         df2[letter] = df2['Choices'].apply(lambda choices: letter in choices)
 
+    # Convert data such that each user+question+choice will be in a single row
     df3 = (df2.drop('Choices', axis=1)
            .melt(id_vars=['user_phone', 'Question'], var_name='Option', value_name='Chosen?')
            .sort_values(['user_phone', 'Question', 'Option'])
            .reset_index(drop=True))
     df3['choice'] = df3['Chosen?'].astype(int)
 
-    # make sure df3 is in the correct size
+    # Make sure df3 is in the correct size
     n_users = len(df['user_phone'].unique())
     n_choices = len(letters)
     n_questions = len(question_cols)
@@ -70,8 +77,12 @@ if __name__ == '__main__':
     questions_flat = [val for sublist in questions for val in sublist] # flatten list
     dfq = pd.DataFrame(questions_flat)
     dfq['Option'] = ['A', 'B', 'C'] * len(questions)
-    dfq2 = pd.concat([dfq] * n_users).reset_index(drop=True) # "repeat" the table n_users times
+    # Since dfq is ordered in the same way as df3 (by ['Question', 'Option']),
+    # then we can just repeat dfq by n_users times and concat the resulting
+    # data with df3.
+    dfq2 = pd.concat([dfq] * n_users).reset_index(drop=True)
 
+    # The following will only works if both have same length
     df4 = pd.concat([df3, dfq2], axis=1)
     output = df4[['user_phone', 'choice', 'skill', 'bentuk_program', 'harga_program']]
     output.to_csv('clean_data.csv', index=False)
