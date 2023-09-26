@@ -22,6 +22,9 @@ def load_questions():
     2. List of skills (comma-separated)
     3. List of bentuk program (comma-separated)
     4. List of prices (comma-separated)
+
+    FYI, the txt file was typed in manually based on the survey page on
+    https://forms.gle/B5fW1Mxk2Pc3EShf6
     '''
     with open('programs_specifications.txt', 'r') as f:
         text = f.read()
@@ -74,6 +77,7 @@ if __name__ == '__main__':
     assert len(df3) == n_users * n_choices * n_questions
 
     questions = load_questions()
+    assert len(questions) == n_questions
     questions_flat = [val for sublist in questions for val in sublist] # flatten list
     dfq = pd.DataFrame(questions_flat)
     dfq['Option'] = ['A', 'B', 'C'] * len(questions)
