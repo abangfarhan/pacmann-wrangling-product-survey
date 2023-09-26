@@ -1,0 +1,49 @@
+01
+Create Analytics Dashboard,Perform Customer Segmentation,Design AB Test Experimentation
+Tutorial Based,Mentoring Based,Mentoring Based
+500_000,350_000,300_000
+---
+02
+Create Analytics Dashboard,Design Data Pipeline,Perform Credit Scoring Analytics
+Tutorial Based,Mentoring Based,Mentoring Based
+500_000,300_000,550_000
+---
+03
+Perform Customer Segmentation,Perform Customer Segmentation,Design Data Pipeline
+Mentoring Based,Tutorial Based,Mentoring Based
+350_000,450_000,250_000
+---
+04
+Design AB Test Experimentation,Perform Price Optimization,Perform Credit Scoring Analytics
+Mentoring Based,Tutorial Based,Mentoring Based
+500_000,350_000,350_000
+---
+05
+Design Data Pipeline,Perform Customer Lifetime Analysis,Design AB Test Experimentation
+Mentoring Based,Tutorial Based,Tutorial Based
+400_000,300_000,300_000
+---
+06
+Perform Churn Analytics,Perform Customer Segmentation,Create Machine Learning Model
+Tutorial Based,Mentoring Based,Mentoring Based
+450_000,300_000,300_000
+---
+07
+Perform Customer Lifetime Analysis,Design Data Pipeline,Deploy Machine Learning Model
+Tutorial Based,Mentoring Based,Tutorial Based
+500_000,550_000,350_000
+---
+08
+Perform Credit Scoring Analytics,Design Data Pipeline,Create Machine Learning Model
+Mentoring Based,Mentoring Based,Tutorial Based
+300_000,550_000,550_000
+---
+09
+Create Analytics Dashboard,Design AB Test Experimentation,Perform Customer Lifetime Analysis
+Mentoring Based,Tutorial Based,Mentoring Based
+250_000,550_000,350_000
+---
+10
+Perform Credit Scoring Analytics,Perform Churn Analytics,Perform Churn Analytics
+Mentoring Based,Mentoring Based,Tutorial Based
+400_000,450_000,500_000
