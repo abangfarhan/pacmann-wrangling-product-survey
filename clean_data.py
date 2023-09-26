@@ -7,8 +7,17 @@ def clean_question_column(col: pd.Series) -> pd.Series:
     return col
 
 def load_questions():
-    # parse programs_specifications.txt
-    # TODO specify that file format briefly
+    '''
+    Here we load the programs_specifications.txt file, which contain program
+    details for each survey question. The text file has a specific format, where
+    each block/question is separated by three dashes ("---"), and there are 4 lines
+    in each block:
+
+    1. Question number
+    2. List of skills (comma-separated)
+    3. List of bentuk program (comma-separated)
+    4. List of prices (comma-separated)
+    '''
     with open('programs_specifications.txt', 'r') as f:
         text = f.read()
 
@@ -25,7 +34,6 @@ def load_questions():
             program.append({'no': number, 'skill': pskill, 'bentuk_program': ptype, 'harga_program': price})
         programs.append(program)
     return programs
-
 
 if __name__ == '__main__':
     df_org = pd.read_csv('./conjoint_survey_organic.xlsx - Sheet1.csv')
@@ -52,7 +60,7 @@ if __name__ == '__main__':
            .reset_index(drop=True))
     df3['choice'] = df3['Chosen?'].astype(int)
 
-    # make sure output is correct
+    # make sure df3 is in the correct size
     n_users = len(df['user_phone'].unique())
     n_choices = len(letters)
     n_questions = len(question_cols)
