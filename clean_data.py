@@ -38,7 +38,7 @@ if __name__ == '__main__':
     df.columns = ['user_phone', *question_cols]
     df.iloc[:,qcol_start:] = df.iloc[:,qcol_start:].apply(clean_question_column)
     # remove rows that choose "D" (i.e. "none of the above") but also choose other option
-    is_invalid = df.iloc[:,1:].apply(lambda col: col.apply(lambda lst: 'D' in lst and len(lst) > 1)).any(axis=1)
+    is_invalid = df.iloc[:,qcol_start:].apply(lambda col: col.apply(lambda lst: 'D' in lst and len(lst) > 1)).any(axis=1)
     df = df[~is_invalid]
 
     df2 = df.melt(id_vars='user_phone', var_name='Question', value_name='Choices')
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     # make sure output is correct
     n_users = len(df['user_phone'].unique())
     n_choices = len(letters)
-    n_questions = 10
+    n_questions = len(question_cols)
     assert len(df3) == n_users * n_choices * n_questions
 
     questions = load_questions()
